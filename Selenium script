@@ -1,0 +1,84 @@
+package seleniumpkg;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByXPath;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class Piraiinfo_Aboutus {
+
+	public static void main(String[] args) throws InterruptedException {
+		// Initializing firefox driver
+		WebDriver driver = new FirefoxDriver();
+
+		// Launching the piraiinfo website
+		driver.get("https://piraiinfo.com/");
+		driver.manage().window().maximize();
+		Thread.sleep(1000);
+		// Navigating to about us page
+		driver.findElement(By.linkText("About us")).click();
+
+		// Navigating to Data services, Cloud services, DevOps services under
+		// Services menu using mouse hover action
+		WebElement elementds = driver.findElement(By.linkText("Services"));
+		Actions actionds = new Actions(driver);
+		actionds.moveToElement(elementds).build().perform();
+		driver.findElement(By.linkText("Data Services")).click();
+		Thread.sleep(1000);
+
+		// Navigating to Cloud services under Services menu using mouse hover
+		// action
+		WebElement elementcs = driver.findElement(By.linkText("Services"));
+		Actions actioncs = new Actions(driver);
+		actioncs.moveToElement(elementcs).build().perform();
+		driver.findElement(By.linkText("Cloud Services")).click();
+		Thread.sleep(1000);
+
+		// Navigating to DevOps services under Services menu using mouse hover
+		// action
+		WebElement elementdo = driver.findElement(By.linkText("Services"));
+		Actions actiondo = new Actions(driver);
+		actiondo.moveToElement(elementdo).build().perform();
+		driver.findElement(By.linkText("DevOps Service")).click();
+		Thread.sleep(1000);
+
+		// Navigating to contact us page
+		driver.findElement(By.linkText("Contact Us")).click();
+
+		// scroll down to find contact us fields
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1000)");
+
+		// Enter details in contact us fields
+		WebElement name = driver
+				.findElement(By.xpath("//*[@class='wpcf7-form-control wpcf7-text wpcf7-validates-as-required']"));
+		name.clear();
+		name.sendKeys("Yourname");
+
+		WebElement email = driver.findElement(By.xpath(
+				"//*[@class='wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email']"));
+		email.clear();
+		email.sendKeys("test@test.com");
+
+		WebElement phone = driver
+				.findElement(By.xpath("//*[@class='wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-tel']"));
+		phone.clear();
+		phone.sendKeys("987654321");
+
+		WebElement message = driver
+				.findElement(By.xpath("//*[@class='wpcf7-form-control wpcf7-textarea wpcf7-validates-as-required']"));
+		message.clear();
+		message.sendKeys("Hi, This is a text message");
+
+		WebElement submit = driver
+				.findElement(By.xpath("//*[@class='wpcf7-form-control wpcf7-submit send-btn sub-but']"));
+		submit.click();
+
+		driver.close();
+
+	}
+
+}
